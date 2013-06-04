@@ -1,15 +1,22 @@
 
 CC=gcc
 CFLAGS=$(shell pbs-config --cflags) -I/usr/lib/jvm/java-1.7.0-openjdk.x86_64/include/ -I/usr/lib/jvm/java-1.7.0-openjdk.x86_64/include/linux
+LIBS=$(shell pbs-config --libs) -ldrmaa
 
-LIBNAME=libdrmaa.so
+LIBNAME=lib/libjdrmaa.so
 
-compile: drmaa_wrap.c drmaa.i
-	$(CC) $(CFLAGS) -fPIC -c drmaa_wrap.c
-	$(CC) -shared drmaa_wrap.o -o $(LIBNAME)
+all: clean lib javac
 
-drmaa_wrap.c: drmaa.i
-	swig -java $(CFLAGS) -outdir swigjava drmaa.i
+javac: jdrmaa_wrap.c
+	javac jdrmaa/*.java
+	javac test/*.java
+
+lib: jdrmaa_wrap.c jdrmaa.i
+	$(CC) $(CFLAGS) $(LIBS) -fPIC -c jdrmaa_wrap.c
+	$(CC) $(LIBS) -shared jdrmaa_wrap.o -o $(LIBNAME)
+
+jdrmaa_wrap.c: jdrmaa.i
+	swig -java -package jdrmaa -outdir jdrmaa $(CFLAGS) jdrmaa.i
 
 clean:
-	rm drmaa_wrap.c drmaa_wrap.o *.so swigjava/*
+	rm -f jdrmaa_wrap.c jdrmaa_wrap.o $(LIBNAME) jdrmaa/* test/*.class

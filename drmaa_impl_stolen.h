@@ -36,11 +36,6 @@ typedef struct drmaa_session_s drmaa_session_t;
 
 typedef struct drmaa_job_s drmaa_job_t;
 
-/** Mutex for accessing @ref drmaa_session global variable. */
-extern pthread_mutex_t drmaa_session_mutex;
-extern drmaa_session_t *drmaa_session;
-
-
 /** DRMAA session data. */
 
 struct drmaa_session_s
