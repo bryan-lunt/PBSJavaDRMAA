@@ -45,46 +45,23 @@ extern drmaa_session_t *drmaa_session;
 
 struct drmaa_session_s
   {
-  int pbs_conn; /**< PBS connection (or -1). */
-  char *contact; /**< Contact to PBS server -- `host[:port]'. */
-  drmaa_job_template_t *jt_list; /**< Cyclic list (with sentinel) of job
-templates created in this DRMAA session. */
-  drmaa_job_t **job_hashtab; /**< Hash table of jobs
-which have to be remembered in DRMAA
-session (was submitted in this
-session and its status was not removed). */
-  int next_time_label; /**< Will be assigned to next submitted job. */
-  pthread_mutex_t conn_mutex; /**< Mutex for PBS connection. */
-  pthread_mutex_t jobs_mutex; /**< Mutex for #jt_list, #job_list
-and #next_time_label. */
   };
 
 struct drmaa_job_template_s
   {
-  drmaa_session_t *session; /**< DRMAA session in which job template was created. */
-  drmaa_job_template_t *prev; /**< Previous job template in list. */
-  drmaa_job_template_t *next; /**< Next job template in list. */
-  void **attrib; /**< Table of DRMAA attributes.
-It is filled with N_DRMAA_ATTRIBS values which are either @c NULL
-(attribute not set) or string (scalar attribute) or @c NULL terminated
-array of strings (vector attribute). */
-  pthread_mutex_t mutex; /**< Mutex for accessing job attributes. */
   };
 
 
 struct drmaa_attr_names_s
   {
-  char **list, **iter;
   };
 
 struct drmaa_attr_values_s
   {
-  char **list, **iter;
   };
 
 struct drmaa_job_ids_s
   {
-  char **list, **iter;
   };
 
 #endif
