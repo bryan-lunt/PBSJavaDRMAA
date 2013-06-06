@@ -94,6 +94,12 @@ public:
 		return retval;
 	}
 
+	static DRMAAVector *get_vector_attribute_names(){
+		DRMAAVector *retval = new DRMAAVector(NAMES);
+		drmaa_get_vector_attribute_names(&(retval->asnames),NULL,0);
+		return retval;
+	}
+
 	static int synchronize(const char *job_ids[], signed long timeout, int dispose){
 		return drmaa_synchronize(job_ids,timeout,dispose,NULL,0);
 	}
@@ -158,7 +164,7 @@ class JobTemplate{
                 return retval;
         }
 
-	int set_vector_attribute(const char *name, const char *value[]){
+	int set_vector_attribute(const char *name, const char **value){
 		return drmaa_set_vector_attribute(jt,name,value,NULL,0);
         }
 

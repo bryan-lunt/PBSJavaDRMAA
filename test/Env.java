@@ -2,7 +2,7 @@ package test;
 
 import jdrmaa.*;
  
-public class Test {
+public class Env {
    public static void main(String argv[]) {
 	System.loadLibrary("jdrmaa");
 
@@ -26,18 +26,6 @@ public class Test {
 }
         System.out.println("####");
 
-
-
-     JobTemplate jt = new JobTemplate();
-     jt.set_attribute("drmaa_remote_command","/tmp/test.sh");
-     jt.set_attribute("drmaa_job_name","Job Submit from DRMAA");
-     String[] foo = {"BRYAN=thisisamessage"};
-	jt.set_vector_attribute("drmaa_v_env",foo);
-     System.out.println(jt.get_attribute("drmaa_job_name"));
-     Job newJob = jt.start();
-
-     System.out.println(newJob.getId());
-     System.out.println("" + newJob.ps());
 
      DRMAA.exit();
 	//System.out.println(example.getMy_variable());
