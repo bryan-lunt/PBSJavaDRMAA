@@ -2,13 +2,20 @@ package test;
 
 import jdrmaa.*;
  
-public class Env {
-   public static void main(String argv[]) throws Exception {
+public class ExTest {
+   public static void main(String argv[]) {
 	System.loadLibrary("jdrmaa");
 
      System.out.println(DRMAA.get_contact());
+try{
+     DRMAA.init("NoSuch");
+}catch(Exception e){
+	System.out.println("A DRMAAException was raised on attempt to call DRMAA.init");
+	e.printStackTrace();
+}
 
-     DRMAA.init();
+	System.out.println("Still OK");
+	System.exit(1);
 
      DRMAAVector attNames = DRMAA.get_attribute_names();
 	System.out.println("Your DRMAA system has the following attributes.");

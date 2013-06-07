@@ -1,3 +1,7 @@
+%{
+#include <exception>
+%}
+
 /*
 *These typemaps are copied/fixed from http://www.swig.org/Doc1.3/Java.html#converting_java_string_arrays
 *(Those examples assume C, not C++)
@@ -37,3 +41,29 @@
 %typemap(javaout) char ** {
     return $jnicall;
   }
+
+
+/**
+ *Exceptions
+ */
+%typemap(throws,throws="DRMAAException") DRMAAException {
+        jclass excep = jenv->FindClass("jdrmaa/DRMAAException");
+        if (excep)
+                jenv->ThrowNew(excep, $1.what());
+        return $null;
+}
+
+%typemap(throws,throws="java.lang.Exception") std::exception {
+        jclass excep = jenv->FindClass("java/lang/Exception");
+        if (excep)
+                jenv->ThrowNew(excep, $1.what());
+        return $null;
+}
+
+/* The next Typemaps make sure that exceptions Don't kill the underlying library, and that they propagate up to Java. */
+%typemap(javabase) DRMAAException "java.lang.Exception";
+%typemap(javacode) DRMAAException %{
+        public DRMAAException(String msg){
+                super(msg);
+        }
+%}

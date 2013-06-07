@@ -5,6 +5,17 @@
 #include <string.h>
 
 
+#include <exception>
+
+class DRMAAException: public std::exception
+{
+public:
+  virtual const char* what() const throw()
+  {
+    return "My exception happened";
+  }
+};
+
 enum attType {NAMES, VALUES, JOBS};
 class DRMAAVector{
 	public://not good style.
@@ -26,8 +37,8 @@ class DRMAA{
 public:
 	static char *get_contact();
 
-	static int init();
-	static int init(const char *contact);
+	static int init() throw(DRMAAException);
+	static int init(const char *contact) throw(DRMAAException);
 	static int exit();
 
 	static DRMAAVector *get_attribute_names();

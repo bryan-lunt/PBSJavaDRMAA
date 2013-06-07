@@ -71,11 +71,11 @@ size_t DRMAAVector::size(){
 		return contact;//I bet this memory leaks.
 	}
 
-	int DRMAA::init(){
+	int DRMAA::init() throw(DRMAAException) {
 		return drmaa_init(NULL,NULL,0);
 	}
 
-	int DRMAA::init(const char *contact){
+	int DRMAA::init(const char *contact) throw(DRMAAException){
 		return drmaa_init(contact,NULL,0);
 	}
 	

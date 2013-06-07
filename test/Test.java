@@ -3,7 +3,7 @@ package test;
 import jdrmaa.*;
  
 public class Test {
-   public static void main(String argv[]) {
+   public static void main(String argv[]) throws Exception {
 	System.loadLibrary("jdrmaa");
 
      System.out.println(DRMAA.get_contact());
