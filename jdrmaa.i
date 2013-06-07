@@ -1,7 +1,7 @@
 %module jdrmaa
 %include "typemaps.i"
 %{
-#include "jdrmaa.h"
+#include "jdrmaa.hxx"
 %}
 
 /*
@@ -49,5 +49,5 @@
 %newobject JobTemplate::get_attribute;
 %newobject DRMAAVector::next;
 
-%include "jdrmaa.h"
+%include "jdrmaa.hxx"
 %include "constants.h"
