@@ -5,6 +5,8 @@
 
 #include "jdrmaa.hxx"
 
+#include <iostream>
+
 DRMAAVector::DRMAAVector(attType intype){
 	type = intype;
 }
@@ -71,15 +73,15 @@ size_t DRMAAVector::size(){
 		return contact;//I bet this memory leaks.
 	}
 
-	int DRMAA::init() throw(DRMAAException) {
-		return drmaa_init(NULL,NULL,0);
-	}
-
 	int DRMAA::init(const char *contact) throw(DRMAAException){
-		return drmaa_init(contact,NULL,0);
+		int reasonCode;
+		reasonCode = drmaa_init(contact,NULL,0);
+		if(reasonCode != DRMAA_ERRNO_SUCCESS)
+			throw DRMAAException(drmaa_strerror(reasonCode));
+		return reasonCode;
 	}
 	
-	int DRMAA::exit(){
+	int DRMAA::exit() throw(DRMAAException){
 		return drmaa_exit(NULL,0);
 	}
 

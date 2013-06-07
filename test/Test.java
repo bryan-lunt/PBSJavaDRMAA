@@ -8,7 +8,7 @@ public class Test {
 
      System.out.println(DRMAA.get_contact());
 
-     DRMAA.init();
+     DRMAA.init(argv.length > 0 ? argv[0] : null);
 
      DRMAAVector attNames = DRMAA.get_attribute_names();
 	System.out.println("Your DRMAA system has the following attributes.");

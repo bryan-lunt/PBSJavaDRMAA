@@ -9,11 +9,19 @@
 
 class DRMAAException: public std::exception
 {
-public:
-  virtual const char* what() const throw()
-  {
-    return "My exception happened";
-  }
+	char *msg;
+	public:
+	DRMAAException(const char *in) throw(){
+		int inLen = strlen(in);
+		msg = (char*)malloc(inLen*sizeof(char));
+		strncpy(msg,in,inLen);
+	}
+	~DRMAAException() throw(){
+		free(msg);
+	}
+	virtual const char* what() const throw(){
+		return msg;
+	}
 };
 
 enum attType {NAMES, VALUES, JOBS};
@@ -37,9 +45,9 @@ class DRMAA{
 public:
 	static char *get_contact();
 
-	static int init() throw(DRMAAException);
 	static int init(const char *contact) throw(DRMAAException);
-	static int exit();
+	static int init() throw(DRMAAException) { return init(NULL); }
+	static int exit() throw(DRMAAException);
 
 	static DRMAAVector *get_attribute_names();
 	static DRMAAVector *get_vector_attribute_names();

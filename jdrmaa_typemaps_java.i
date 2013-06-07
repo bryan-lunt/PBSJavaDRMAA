@@ -63,7 +63,11 @@
 /* The next Typemaps make sure that exceptions Don't kill the underlying library, and that they propagate up to Java. */
 %typemap(javabase) DRMAAException "java.lang.Exception";
 %typemap(javacode) DRMAAException %{
-        public DRMAAException(String msg){
-                super(msg);
+//        public DRMAAException(String msg){
+//                super(msg);
+ //       }
+
+        public String getMessage(){
+                return what();
         }
 %}
