@@ -4,6 +4,7 @@
     </description>
                   <!-- set global properties for this build -->
   <property name="src" location="src"/>
+  <property name="gensrc" location="gensrc"/>
   <property name="build" location="build"/>
   <property name="dist"  location="dist"/>
 
@@ -12,34 +13,49 @@
     <tstamp/>
         <!-- Create the build directory structure used by compile -->
     <mkdir dir="${build}"/>
+    <mkdir dir="${gensrc}"/>
   </target>
 
 <!-- SWIG Generate -->
 <target name="swig">
+  <mkdir dir="${gensrc}/jdrmaa"/>
   <exec executable="make">
       <arg value="swig"/>
   </exec>
+  <javac srcdir="${gensrc}" destdir="${build}"/>
 </target>
 
-  <target name="compile" depends="init"
+<!-- COMPILE CPP part of wrapper into library. -->
+<target name="cpplib" depends="swig">
+  <exec executable="make">
+  	<arg value="lib"/>
+  </exec>
+  <copy file="lib/libjdrmaa.so" todir="${build}/"/>
+</target>
+
+  <target name="compile" depends="init,swig"
           description="compile the source " >
               <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}"/>
   </target>
 
-  <target name="dist" depends="compile"
+  <target name="dist" depends="compile,cpplib"
           description="generate the distribution" >
               <!-- Create the distribution directory -->
     <mkdir dir="${dist}/lib"/>
 
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/lib/MyProject-${DSTAMP}.jar" basedir="${build}"/>
+    <jar jarfile="${dist}/lib/PBSJavaDRMAA-${DSTAMP}.jar" basedir="${build}"/>
   </target>
 
   <target name="clean"
           description="clean up" >
               <!-- Delete the ${build} and ${dist} directory trees -->
     <delete dir="${build}"/>
-        <delete dir="${dist}"/>
+    <delete dir="${dist}"/>
+    <delete dir="${gensrc}"/>
+    <exec executable="make">
+    	<arg value="clean"/>
+    </exec>
   </target>
 </project>

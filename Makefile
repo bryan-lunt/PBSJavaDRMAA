@@ -20,10 +20,10 @@ jdrmaa.o: jdrmaa.hxx jdrmaa.cpp
 swig: jdrmaa_wrap.cxx
 
 jdrmaa_wrap.cxx: jdrmaa.i
-	swig -c++ -java -package jdrmaa -outdir src/jdrmaa $(INCLUDES) jdrmaa.i
+	swig -c++ -java -package jdrmaa -outdir gensrc/jdrmaa $(INCLUDES) jdrmaa.i
 
 clean: core
-	rm -f jdrmaa_wrap.* $(LIBNAME) jdrmaa/* test/*.class $(OBJS)
+	rm -f jdrmaa_wrap.* $(LIBNAME) $(OBJS)
 
 core:
 	rm -f core.*.dmp javacore.*.txt Snap.*.trc
