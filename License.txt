@@ -1,0 +1,8 @@
+All original code in this project (Code originating in this project) is licensed under the LGPL 3.0 .
+
+The file "constants.h" is bits copied verbatim from <drmaa.h> from PBS/Torque. I believe that legal opinion on copying constants is that that is OK. It is therefore copied here in good faith.
+Actually, since this may harm portability, I will eventually remove this file once I can figure out how to make SWIG get and include only those constants I want out of the user supplied <drmaa.h> file.
+
+Code in the "nu" directory is also licensed under the LGPL insofar as it has been modified for this project. An original, unaltered version of Adam Heinrich's "NativeUtils.java" was commit, see that version and contact the original author for further licensing information.
+
+This project is distributed with a copy of the GNU Lesser General Public License. (lgpl-3.0.txt) If you have questions about this license, or did not receive a copy, they may be answered here. http://www.gnu.org/licenses/lgpl.html

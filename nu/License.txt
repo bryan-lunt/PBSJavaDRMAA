@@ -1,0 +1,7 @@
+The file NativeUtils.java is copied/modiefied from Adam Heinrich <adam@adamh.cz>, http://www.adamh.cz
+
+In e-mail exchanges with Bryan Lunt he has both authorized it for use in this project, and indicated that he intentionally did not add a license agreement to the code.
+
+HOWEVER, I strongly recommend that you contact him before using it in your own code.
+
+Versions modified by Bryan Lunt shall be covered under the LGLP 3.0 .
