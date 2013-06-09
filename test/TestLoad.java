@@ -5,8 +5,7 @@ import jdrmaa.*;
  
 public class TestLoad {
    public static void main(String argv[]) throws Exception {
-	//System.loadLibrary("jdrmaa");
-	NativeUtils.loadLibraryFromJar("/libjdrmaa.so");
+     DRMAA.loadNative();
 
      System.out.println(DRMAA.get_contact());
 

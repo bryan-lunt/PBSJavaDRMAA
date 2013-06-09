@@ -95,3 +95,9 @@ Insofar as there exists work done by members of the PBSJavaDRMAA project, the fo
                 return what();
         }
 %}
+
+%typemap(javacode) DRMAA %{
+        public static void loadNative() throws Exception {
+                cz.adamh.NativeUtils.loadLibraryFromJar("/libjdrmaa.so");
+        }
+%}

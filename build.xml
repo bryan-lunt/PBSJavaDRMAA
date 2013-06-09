@@ -22,7 +22,6 @@
   <exec executable="make">
       <arg value="swig"/>
   </exec>
-  <javac srcdir="${gensrc}" destdir="${build}"/>
 </target>
 
 <!-- COMPILE CPP part of wrapper into library. -->
@@ -37,6 +36,7 @@
           description="compile the source " >
               <!-- Compile the java code from ${src} into ${build} -->
     <javac srcdir="${src}" destdir="${build}"/>
+  <javac srcdir="${gensrc}" destdir="${build}"/>
   </target>
 
   <target name="dist" depends="compile,cpplib"
