@@ -35,8 +35,8 @@
   <target name="compile" depends="init,swig"
           description="compile the source " >
               <!-- Compile the java code from ${src} into ${build} -->
-    <javac srcdir="${src}" destdir="${build}"/>
-  <javac srcdir="${gensrc}" destdir="${build}"/>
+    <javac includeantruntime="false" srcdir="${src}" destdir="${build}"/>
+  <javac includeantruntime="false" srcdir="${gensrc}" destdir="${build}"/>
   </target>
 
   <target name="dist" depends="compile,cpplib"
