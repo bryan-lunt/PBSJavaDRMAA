@@ -2,8 +2,10 @@ CPP=g++
 CC=gcc
 
 CFLAGS=-g
-INCLUDES=$(shell pbs-config --cflags) -I/usr/lib/jvm/java-1.6.0-openjdk.x86_64/include/ -I/usr/lib/jvm/java-1.6.0-openjdk.x86_64/include/linux -I${HOME}/local-lib/include 
-LIBS=$(shell pbs-config --libs) -L${HOME}/local-lib/lib -ldrmaa -lstdc++
+#INCLUDES=$(shell pbs-config --cflags) -I/usr/lib/jvm/default-jvm/include/ -I/usr/lib/jvm/default-jvm/include/linux -I${HOME}/local-lib/include 
+INCLUDES=-I/usr/include -I/usr/lib/jvm/default-jvm/include/ -I/usr/lib/jvm/default-jvm/include/linux -I${HOME}/local-lib/include 
+#LIBS=$(shell pbs-config --libs) -L${HOME}/local-lib/lib -ldrmaa -lstdc++
+LIBS=-L/usr/lib -L/usr/lib64 -L${HOME}/local-lib/lib -ldrmaa -lstdc++
 
 LIBNAME=lib/libjdrmaa.so
 

@@ -46,6 +46,7 @@
 
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
     <jar jarfile="${dist}/lib/PBSJavaDRMAA-${DSTAMP}.jar" basedir="${build}"/>
+    <jar jarfile="${dist}/lib/PBSJavaDRMAA.jar" basedir="${build}"/>
   </target>
 
   <target name="clean"
