@@ -29,11 +29,12 @@ public class Test {
 
 
      JobTemplate jt = new JobTemplate();
-     jt.set_attribute("drmaa_remote_command","/tmp/test.sh");
-     jt.set_attribute("drmaa_job_name","Job Submit from DRMAA");
+     jt.set_attribute("drmaa_remote_command","$HOME/test.sh");
+     jt.set_attribute("drmaa_job_name","Job_Submit_from_DRMAA");
      String[] foo = {"BRYAN=thisisamessage"};
 	jt.set_vector_attribute("drmaa_v_env",foo);
      System.out.println(jt.get_attribute("drmaa_job_name"));
+     System.out.println(jt.get_attribute("drmaa_output_path"));
      Job newJob = jt.start();
 
      System.out.println(newJob.getId());
