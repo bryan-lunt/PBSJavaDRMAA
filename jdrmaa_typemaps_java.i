@@ -98,6 +98,11 @@ Insofar as there exists work done by members of the PBSJavaDRMAA project, the fo
 
 %typemap(javacode) DRMAA %{
         public static void loadNative() throws Exception {
+                try {
                 cz.adamh.NativeUtils.loadLibraryFromJar("/libjdrmaa.so");
+                } catch (Error e) {
+                       System.err.println("Error loading libjdrmaa.so: " + e.getMessage());
+                       throw e; 
+                }
         }
 %}

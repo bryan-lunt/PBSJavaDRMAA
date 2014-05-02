@@ -45,9 +45,21 @@
     <mkdir dir="${dist}/lib"/>
 
     <!-- Put everything in ${build} into the MyProject-${DSTAMP}.jar file -->
-    <jar jarfile="${dist}/lib/PBSJavaDRMAA-${DSTAMP}.jar" basedir="${build}"/>
+    <jar jarfile="${dist}/lib/PBSJavaDRMAA-0.0.1.jar" basedir="${build}"/>
     <jar jarfile="${dist}/lib/PBSJavaDRMAA.jar" basedir="${build}"/>
   </target>
+
+	<target name='install' depends='dist'>
+	    <exec executable="mvn">
+		<arg value="install:install-file"/>
+		<arg value="-Dfile=${dist}/lib/PBSJavaDRMAA.jar"/>
+		<arg value ="-DgroupId=jdrmaa"/>
+		<arg value="-DartifactId=PBSJavaDRMAA"/>
+		<arg value="-Dversion=0.0.1"/>
+		<arg value="-Dpackaging=jar"/>
+		<arg value="-DgeneratePOM=true"/>       
+	    </exec>   
+	</target>
 
   <target name="clean"
           description="clean up" >
